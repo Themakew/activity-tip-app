@@ -12,7 +12,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private(set) lazy var mainWindow = UIWindow()
-//    private let router = AppCoordinator().strongRouter
+    private let router = AppCoordinator().strongRouter
 
     lazy var persistentContainer: NSPersistentContainer = {
         /*
@@ -44,14 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal Methods
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-//        configureUI()
-//        mainWindow.backgroundColor = .white
-//        router.setRoot(for: mainWindow)
-
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = ViewController() // Your initial view controller.
-        window.makeKeyAndVisible()
-        mainWindow = window
+        configureUI()
+        mainWindow.backgroundColor = .white
+        router.setRoot(for: mainWindow)
         return true
     }
 
@@ -62,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-// MARK: CoreData Configuration
+// MARK: - CoreData Configuration
 
 extension AppDelegate {
 
