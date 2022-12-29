@@ -11,26 +11,8 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
-    }
-
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-
-    // MARK: - Core Data stack
+    private(set) lazy var mainWindow = UIWindow()
+//    private let router = AppCoordinator().strongRouter
 
     lazy var persistentContainer: NSPersistentContainer = {
         /*
@@ -44,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -58,6 +40,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+
+    // MARK: Internal Methods
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        configureUI()
+//        mainWindow.backgroundColor = .white
+//        router.setRoot(for: mainWindow)
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = ViewController() // Your initial view controller.
+        window.makeKeyAndVisible()
+        mainWindow = window
+        return true
+    }
+
+    // MARK: Private Methods
+
+    private func configureUI() {
+        UIView.appearance().overrideUserInterfaceStyle = .light
+    }
+}
+
+// MARK: CoreData Configuration
+
+extension AppDelegate {
 
     // MARK: - Core Data Saving support
 
@@ -74,5 +81,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
