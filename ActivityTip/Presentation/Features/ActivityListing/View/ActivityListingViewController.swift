@@ -16,14 +16,12 @@ final class ActivityListingViewController: UIViewController {
     private let viewModel: ActivityListingViewModelProtocol
     private let disposeBag = DisposeBag()
     private let titleLabel = UILabel(translateMask: false).apply {
-        $0.text = "Are you bored?"
         $0.font = UIFont.boldSystemFont(ofSize: 30)
         $0.tintColor = .black
         $0.textAlignment = .left
     }
 
     private let subTitleLabel = UILabel(translateMask: false).apply {
-        $0.text = "Here an exercise tip for you now"
         $0.font = UIFont.boldSystemFont(ofSize: 20)
         $0.tintColor = .black
         $0.textAlignment = .left
@@ -37,14 +35,12 @@ final class ActivityListingViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintColor = .white
         $0.backgroundColor = .blue
-        $0.setTitle("Add Details", for: .normal)
     }
 
     private let anotherTipButton = UIButton(type: .system).apply {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.tintColor = .white
         $0.backgroundColor = .blue
-        $0.setTitle("New Activity Tip", for: .normal)
     }
 
     private let spinnerView = UIActivityIndicatorView(translateMask: false).apply {
@@ -82,6 +78,22 @@ final class ActivityListingViewController: UIViewController {
     // MARK: - Private Methods
 
     private func bindRx() {
+        viewModel.output.titleText
+            .drive(titleLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.output.subTitleText
+            .drive(subTitleLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        viewModel.output.addDetailButtonTitleText
+            .drive(addDetailsButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
+        viewModel.output.anotherTipButtonTitleText
+            .drive(anotherTipButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
         addDetailsButton.rx.tap
             .bind(to: viewModel.input.openDetailScreen)
             .disposed(by: disposeBag)
@@ -119,11 +131,11 @@ extension ActivityListingViewController: ViewCode {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 15),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
 
             subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 15),
+            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
 
             activityView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 30),
             activityView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

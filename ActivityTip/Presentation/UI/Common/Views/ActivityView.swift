@@ -19,6 +19,7 @@ final class ActivityView: UIView {
     private let activityNameValueLabel = UILabel(translateMask: false).apply {
         $0.font = UIFont.boldSystemFont(ofSize: 13)
         $0.textAlignment = .center
+        $0.lineBreakMode = .byTruncatingTail
     }
 
     private let activityAccessibilityLabel = UILabel(translateMask: false).apply {
@@ -94,7 +95,7 @@ extension ActivityView: ViewCode {
         NSLayoutConstraint.activate([
             activityTipLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             activityTipLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            activityTipLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            activityTipLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
             activityNameValueLabel.topAnchor.constraint(equalTo: activityTipLabel.bottomAnchor, constant: 10),
             activityNameValueLabel.leadingAnchor.constraint(equalTo: activityTipLabel.leadingAnchor),
@@ -102,7 +103,7 @@ extension ActivityView: ViewCode {
 
             activityAccessibilityLabel.topAnchor.constraint(equalTo: activityNameValueLabel.bottomAnchor, constant: 20),
             activityAccessibilityLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            activityAccessibilityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            activityAccessibilityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
             activityAccessibilityValueLabel.topAnchor.constraint(
                 equalTo: activityAccessibilityLabel.bottomAnchor,
@@ -117,7 +118,7 @@ extension ActivityView: ViewCode {
 
             activityTypeLabel.topAnchor.constraint(equalTo: activityAccessibilityValueLabel.bottomAnchor, constant: 20),
             activityTypeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            activityTypeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            activityTypeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
             activityTypeValueLabel.topAnchor.constraint(equalTo: activityTypeLabel.bottomAnchor, constant: 10),
             activityTypeValueLabel.leadingAnchor.constraint(equalTo: activityTypeLabel.leadingAnchor),
@@ -125,7 +126,7 @@ extension ActivityView: ViewCode {
 
             activityPriceLabel.topAnchor.constraint(equalTo: activityTypeValueLabel.bottomAnchor, constant: 20),
             activityPriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            activityPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            activityPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
             activityPriceValueLabel.topAnchor.constraint(equalTo: activityPriceLabel.bottomAnchor, constant: 10),
             activityPriceValueLabel.leadingAnchor.constraint(equalTo: activityPriceLabel.leadingAnchor),
@@ -133,7 +134,7 @@ extension ActivityView: ViewCode {
 
             activityParticipantsLabel.topAnchor.constraint(equalTo: activityPriceValueLabel.bottomAnchor, constant: 20),
             activityParticipantsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-            activityParticipantsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 15),
+            activityParticipantsLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
 
             activityParticipantsValueLabel.topAnchor.constraint(
                 equalTo: activityParticipantsLabel.bottomAnchor,

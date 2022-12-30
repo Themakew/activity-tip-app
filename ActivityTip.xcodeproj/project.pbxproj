@@ -36,9 +36,12 @@
 		5654653E295F0575007B3B5D /* ActivityInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654653D295F0575007B3B5D /* ActivityInfoEntity.swift */; };
 		56546540295F0EE3007B3B5D /* UIView+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654653F295F0EE3007B3B5D /* UIView+Misc.swift */; };
 		56546541295F294C007B3B5D /* ActivityListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546525295E49EC007B3B5D /* ActivityListingViewModel.swift */; };
-		56546547295F3A22007B3B5D /* ActivityDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546546295F3A22007B3B5D /* ActivityDetailCoordinator.swift */; };
 		56546549295F3A32007B3B5D /* ActivityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546548295F3A32007B3B5D /* ActivityDetailViewModel.swift */; };
 		5654654B295F3A41007B3B5D /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654654A295F3A41007B3B5D /* ActivityDetailViewController.swift */; };
+		5654654D295F6874007B3B5D /* ActivityStatusEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654654C295F6874007B3B5D /* ActivityStatusEntity.swift */; };
+		56546551295F72C7007B3B5D /* ActivityDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546550295F72C7007B3B5D /* ActivityDetailRepository.swift */; };
+		56546553295F72DA007B3B5D /* CoreDataAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546552295F72DA007B3B5D /* CoreDataAPIService.swift */; };
+		56546555295F83B7007B3B5D /* ActivityDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546554295F83B7007B3B5D /* ActivityDetailUseCase.swift */; };
 		5659148E295DC5B100ECE275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659148D295DC5B100ECE275 /* AppDelegate.swift */; };
 		56591498295DC5B100ECE275 /* ActivityTip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56591496295DC5B100ECE275 /* ActivityTip.xcdatamodeld */; };
 		5659149A295DC5B300ECE275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56591499295DC5B300ECE275 /* Assets.xcassets */; };
@@ -67,9 +70,12 @@
 		5654653B295F03C8007B3B5D /* Configurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configurable.swift; sourceTree = "<group>"; };
 		5654653D295F0575007B3B5D /* ActivityInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfoEntity.swift; sourceTree = "<group>"; };
 		5654653F295F0EE3007B3B5D /* UIView+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Misc.swift"; sourceTree = "<group>"; };
-		56546546295F3A22007B3B5D /* ActivityDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailCoordinator.swift; sourceTree = "<group>"; };
 		56546548295F3A32007B3B5D /* ActivityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewModel.swift; sourceTree = "<group>"; };
 		5654654A295F3A41007B3B5D /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
+		5654654C295F6874007B3B5D /* ActivityStatusEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStatusEntity.swift; sourceTree = "<group>"; };
+		56546550295F72C7007B3B5D /* ActivityDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailRepository.swift; sourceTree = "<group>"; };
+		56546552295F72DA007B3B5D /* CoreDataAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataAPIService.swift; sourceTree = "<group>"; };
+		56546554295F83B7007B3B5D /* ActivityDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailUseCase.swift; sourceTree = "<group>"; };
 		5659148A295DC5B100ECE275 /* ActivityTip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActivityTip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5659148D295DC5B100ECE275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56591497295DC5B100ECE275 /* ActivityTip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ActivityTip.xcdatamodel; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				5654650A295E4363007B3B5D /* ActivityAPIService.swift */,
+				56546552295F72DA007B3B5D /* CoreDataAPIService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				56546511295E4779007B3B5D /* ActivityListingRepository.swift */,
+				56546550295F72C7007B3B5D /* ActivityDetailRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -224,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				56546515295E489A007B3B5D /* ActivityListingUseCase.swift */,
+				56546554295F83B7007B3B5D /* ActivityDetailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -233,6 +242,7 @@
 			children = (
 				5654652E295E6DB5007B3B5D /* ActivityEntity.swift */,
 				5654653D295F0575007B3B5D /* ActivityInfoEntity.swift */,
+				5654654C295F6874007B3B5D /* ActivityStatusEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -360,19 +370,10 @@
 		56546542295F39CC007B3B5D /* ActivityDetail */ = {
 			isa = PBXGroup;
 			children = (
-				56546543295F39F8007B3B5D /* Coordinator */,
 				56546544295F3A00007B3B5D /* ViewModel */,
 				56546545295F3A0D007B3B5D /* View */,
 			);
 			path = ActivityDetail;
-			sourceTree = "<group>";
-		};
-		56546543295F39F8007B3B5D /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				56546546295F3A22007B3B5D /* ActivityDetailCoordinator.swift */,
-			);
-			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		56546544295F3A00007B3B5D /* ViewModel */ = {
@@ -508,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56546534295E7725007B3B5D /* NetworkError.swift in Sources */,
+				5654654D295F6874007B3B5D /* ActivityStatusEntity.swift in Sources */,
 				5659148E295DC5B100ECE275 /* AppDelegate.swift in Sources */,
 				56546540295F0EE3007B3B5D /* UIView+Misc.swift in Sources */,
 				565464FB295E0D2C007B3B5D /* ServiceAPICall.swift in Sources */,
@@ -515,6 +517,7 @@
 				5654653C295F03C8007B3B5D /* Configurable.swift in Sources */,
 				56546522295E49CA007B3B5D /* AppCoordinator.swift in Sources */,
 				56546524295E49DD007B3B5D /* ActivityListingCoordinator.swift in Sources */,
+				56546551295F72C7007B3B5D /* ActivityDetailRepository.swift in Sources */,
 				56546512295E4779007B3B5D /* ActivityListingRepository.swift in Sources */,
 				5654650B295E4363007B3B5D /* ActivityAPIService.swift in Sources */,
 				5654654B295F3A41007B3B5D /* ActivityDetailViewController.swift in Sources */,
@@ -523,9 +526,9 @@
 				56546549295F3A32007B3B5D /* ActivityDetailViewModel.swift in Sources */,
 				56546500295E1156007B3B5D /* Encodable+Misc.swift in Sources */,
 				56546528295E49F9007B3B5D /* ActivityListingViewController.swift in Sources */,
-				56546547295F3A22007B3B5D /* ActivityDetailCoordinator.swift in Sources */,
 				56546536295EFDE0007B3B5D /* ViewCode.swift in Sources */,
 				5654650E295E4451007B3B5D /* ActivityResponse.swift in Sources */,
+				56546555295F83B7007B3B5D /* ActivityDetailUseCase.swift in Sources */,
 				5654653A295F0360007B3B5D /* ActivityView.swift in Sources */,
 				56546516295E489A007B3B5D /* ActivityListingUseCase.swift in Sources */,
 				5654653E295F0575007B3B5D /* ActivityInfoEntity.swift in Sources */,
@@ -533,6 +536,7 @@
 				56591498295DC5B100ECE275 /* ActivityTip.xcdatamodeld in Sources */,
 				5654652C295E6AE9007B3B5D /* Rx+Misc.swift in Sources */,
 				56546538295F0030007B3B5D /* Apply.swift in Sources */,
+				56546553295F72DA007B3B5D /* CoreDataAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

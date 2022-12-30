@@ -11,6 +11,7 @@ import UIKit
 enum ActivityListingRouter: Route {
     case home
     case detailScreen(object: ActivityInfoEntity)
+    case dismiss
 }
 
 final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRouter> {
@@ -37,7 +38,18 @@ final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRou
             let viewController = ActivityListingViewController(viewModel: viewModel)
             return .push(viewController)
         case let .detailScreen(object):
-            return .push(UIViewController())
+            let coreDataAPIService = CoreDataAPIService()
+            let activityDetailRepository = ActivityDetailRepository(coreDataAPIService: coreDataAPIService)
+            let activityDetailUseCase = ActivityDetailUseCase(activityDetailRepository: activityDetailRepository)
+            let viewModel = ActivityDetailViewModel(
+                router: strongRouter,
+                activityInfoEntity: object,
+                activityDetailUseCase: activityDetailUseCase
+            )
+            let viewController = ActivityDetailViewController(viewModel: viewModel)
+            return .push(viewController)
+        case .dismiss:
+            return .dismiss()
         }
     }
 }

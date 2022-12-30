@@ -7,6 +7,7 @@
 
 import RxRelay
 import RxSwift
+import RxCocoa
 import UIKit
 import XCoordinator
 
@@ -22,6 +23,10 @@ protocol ActivityListingViewModelInput {
 
 protocol ActivityListingViewModelOutput {
     var data: PublishRelay<ActivityInfoEntity> { get }
+    var titleText: Driver<String> { get }
+    var subTitleText: Driver<String> { get }
+    var addDetailButtonTitleText: Driver<String> { get }
+    var anotherTipButtonTitleText: Driver<String> { get }
 }
 
 extension ActivityListingViewModelProtocol where Self: ActivityListingViewModelInput & ActivityListingViewModelOutput {
@@ -44,6 +49,11 @@ final class ActivityListingViewModel:
 
     // Outputs
     let data = PublishRelay<ActivityInfoEntity>()
+
+    let titleText: Driver<String> = .just("Are you bored?")
+    let subTitleText: Driver<String> = .just("Here an exercise tip for you now")
+    let addDetailButtonTitleText: Driver<String> = .just("Add Details")
+    let anotherTipButtonTitleText: Driver<String> = .just("New Activity Tip")
 
     // MARK: - Private Properties
 
