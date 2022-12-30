@@ -48,7 +48,7 @@ final class ActivityListingViewModel:
 
     func bindRx() {
         let responseResultObservable = getActivityTip
-            .flatMap(weak: self) { this, _ -> Observable<Result<ActivityResponse, NetworkError>> in
+            .flatMap(weak: self) { this, _ -> Observable<Result<ActivityEntity, NetworkError>> in
                 return this.activityListingUseCase.getActivityTip()
                     .asObservable()
             }

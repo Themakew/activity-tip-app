@@ -8,7 +8,15 @@
 import RxSwift
 
 protocol ActivityListingUseCaseProtocol {
-    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>>
+    func getActivityTip() -> Single<Result<ActivityEntity, NetworkError>>
+}
+
+enum ActivityType: String {
+    case education, recreational, social, diy, charity, cooking, relaxation, music, busywork, none
+}
+
+enum BudgetType: String {
+    case cheap, average, expensive, none
 }
 
 final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
@@ -25,7 +33,57 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
 
     // MARK: Internal Methods
 
-    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>> {
+    func getActivityTip() -> Single<Result<ActivityEntity, NetworkError>> {
         return activityListingRepository.getActivityTip()
+            .map { [weak self] result in
+                switch result {
+                case let .success(object):
+                    let activityEntity = ActivityEntity(
+                        activity: object.activity ?? "",
+                        accessibility: self?.getAccessibilityPercentage(value: object.accessibility) ?? "",
+                        type: self?.getType(type: object.type) ?? .none,
+                        participants: object.participants,
+                        price: self?.getBudgetType(price: object.price) ?? .none,
+                        link: object.link,
+                        key: object.key
+                    )
+                    return .success(activityEntity)
+                case let .failure(error):
+                    return .failure(error)
+                }
+            }
+    }
+
+    // MARK: Private Methods
+
+    private func getAccessibilityPercentage(value: Double?) -> String {
+        guard let value = value else {
+            return "0%"
+        }
+
+        let percentage = value * 100
+        return String(format: "%.0f%%", percentage)
+    }
+
+    private func getType(type: String?) -> ActivityType {
+        if let type = ActivityType(rawValue: type ?? "") {
+            return type
+        } else {
+            return .none
+        }
+    }
+
+    private func getBudgetType(price: Double?) -> BudgetType {
+        if let price {
+            if price <= 0.45 {
+                return .cheap
+            } else if price >= 0.45 && price <= 0.55 {
+                return .average
+            } else {
+                return .expensive
+            }
+        } else {
+            return .none
+        }
     }
 }

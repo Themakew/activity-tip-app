@@ -41,6 +41,7 @@ final class ServiceAPICall: ServiceAPICallProtocol {
                         if (errorMessage ?? "").isEmpty {
                             do {
                                 let object = try decoder.decode(T.self, from: data)
+                                debugPrint("Response: \(object)")
                                 observer.onNext(.success(object))
                             } catch {
                                 observer.onNext(
