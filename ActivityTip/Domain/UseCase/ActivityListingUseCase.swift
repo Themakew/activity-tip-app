@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol ActivityListingUseCaseProtocol {
-    func getActivityTip() -> Single<Result<ActivityEntity, NetworkError>>
+    func getActivityTip() -> Single<Result<ActivityInfoEntity, NetworkError>>
 }
 
 enum ActivityType: String {
@@ -33,7 +33,7 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
 
     // MARK: Internal Methods
 
-    func getActivityTip() -> Single<Result<ActivityEntity, NetworkError>> {
+    func getActivityTip() -> Single<Result<ActivityInfoEntity, NetworkError>> {
         return activityListingRepository.getActivityTip()
             .map { [weak self] result in
                 switch result {
@@ -47,7 +47,16 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
                         link: object.link,
                         key: object.key
                     )
-                    return .success(activityEntity)
+
+                    let activityInfo = ActivityInfoEntity(
+                        activityTipTitleText: "Activity Tip:",
+                        activityAccessibilityTitleText: "Accessibility",
+                        activityTypeTitleText: "Type",
+                        activityPriceTitleText: "Price",
+                        activityParticipantsTitleText: "Participants",
+                        activityInfo: activityEntity
+                    )
+                    return .success(activityInfo)
                 case let .failure(error):
                     return .failure(error)
                 }

@@ -19,7 +19,7 @@ protocol ActivityListingViewModelInput {
 }
 
 protocol ActivityListingViewModelOutput {
-
+    var data: PublishRelay<ActivityInfoEntity> { get }
 }
 
 extension ActivityListingViewModelProtocol where Self: ActivityListingViewModelInput & ActivityListingViewModelOutput {
@@ -32,11 +32,21 @@ final class ActivityListingViewModel:
     ActivityListingViewModelInput,
     ActivityListingViewModelOutput {
 
+    // MARK: - Internal Properties
+
     let activityListingUseCase: ActivityListingUseCaseProtocol
 
+    // Inputs
     let getActivityTip = PublishRelay<Void>()
 
+    // Outputs
+    let data = PublishRelay<ActivityInfoEntity>()
+
+    // MARK: - Private Properties
+
     private let disposeBag = DisposeBag()
+
+    // MARK: - Initializer
 
     init(
         activityListingUseCase: ActivityListingUseCaseProtocol
@@ -46,9 +56,11 @@ final class ActivityListingViewModel:
         bindRx()
     }
 
-    func bindRx() {
+    // MARK: - Private Methods
+
+    private func bindRx() {
         let responseResultObservable = getActivityTip
-            .flatMap(weak: self) { this, _ -> Observable<Result<ActivityEntity, NetworkError>> in
+            .flatMap(weak: self) { this, _ -> Observable<Result<ActivityInfoEntity, NetworkError>> in
                 return this.activityListingUseCase.getActivityTip()
                     .asObservable()
             }
@@ -59,12 +71,11 @@ final class ActivityListingViewModel:
             .subscribe(onNext: { this, result in
                 switch result {
                 case let .success(response):
-                    print(response)
+                    self.data.accept(response)
                 case let .failure(error):
                     print(error)
                 }
             })
             .disposed(by: disposeBag)
     }
-
 }
