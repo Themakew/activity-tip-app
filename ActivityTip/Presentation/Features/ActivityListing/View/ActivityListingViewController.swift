@@ -82,6 +82,10 @@ final class ActivityListingViewController: UIViewController {
     // MARK: - Private Methods
 
     private func bindRx() {
+        addDetailsButton.rx.tap
+            .bind(to: viewModel.input.openDetailScreen)
+            .disposed(by: disposeBag)
+
         anotherTipButton.rx.tap
             .do(onNext: { [weak self] _ in
                 self?.spinnerView.isHidden = false

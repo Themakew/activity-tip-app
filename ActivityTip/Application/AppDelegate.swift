@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+
     // MARK: Private Methods
 
     private func configureUI() {

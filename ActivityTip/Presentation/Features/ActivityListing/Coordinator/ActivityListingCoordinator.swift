@@ -6,9 +6,11 @@
 //
 
 import XCoordinator
+import UIKit
 
 enum ActivityListingRouter: Route {
     case home
+    case detailScreen(object: ActivityInfoEntity)
 }
 
 final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRouter> {
@@ -28,10 +30,14 @@ final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRou
             let serviceAPI = ActivityAPIService(serviceAPI: service)
             let activityListingRepository = ActivityListingRepository(activityAPIService: serviceAPI)
             let activityListingUseCase = ActivityListingUseCase(activityListingRepository: activityListingRepository)
-            let viewModel = ActivityListingViewModel(activityListingUseCase: activityListingUseCase)
+            let viewModel = ActivityListingViewModel(
+                router: strongRouter,
+                activityListingUseCase: activityListingUseCase
+            )
             let viewController = ActivityListingViewController(viewModel: viewModel)
             return .push(viewController)
+        case let .detailScreen(object):
+            return .push(UIViewController())
         }
     }
-
 }

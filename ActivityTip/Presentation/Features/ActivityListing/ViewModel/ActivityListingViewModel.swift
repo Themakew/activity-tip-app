@@ -8,6 +8,7 @@
 import RxRelay
 import RxSwift
 import UIKit
+import XCoordinator
 
 protocol ActivityListingViewModelProtocol {
     var input: ActivityListingViewModelInput { get }
@@ -16,6 +17,7 @@ protocol ActivityListingViewModelProtocol {
 
 protocol ActivityListingViewModelInput {
     var getActivityTip: PublishRelay<Void> { get }
+    var openDetailScreen: PublishRelay<Void> { get }
 }
 
 protocol ActivityListingViewModelOutput {
@@ -38,6 +40,7 @@ final class ActivityListingViewModel:
 
     // Inputs
     let getActivityTip = PublishRelay<Void>()
+    let openDetailScreen = PublishRelay<Void>()
 
     // Outputs
     let data = PublishRelay<ActivityInfoEntity>()
@@ -45,12 +48,17 @@ final class ActivityListingViewModel:
     // MARK: - Private Properties
 
     private let disposeBag = DisposeBag()
+    private let router: StrongRouter<ActivityListingRouter>
+
+    private let activityData = BehaviorRelay<ActivityInfoEntity?>(value: nil)
 
     // MARK: - Initializer
 
     init(
+        router: StrongRouter<ActivityListingRouter>,
         activityListingUseCase: ActivityListingUseCaseProtocol
     ) {
+        self.router = router
         self.activityListingUseCase = activityListingUseCase
 
         bindRx()
@@ -71,9 +79,19 @@ final class ActivityListingViewModel:
             .subscribe(onNext: { this, result in
                 switch result {
                 case let .success(response):
+                    self.activityData.accept(response)
                     self.data.accept(response)
                 case let .failure(error):
                     print(error)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        openDetailScreen
+            .withLatestFrom(activityData)
+            .subscribe(onNext: { [weak self] object in
+                if let object {
+                    self?.router.trigger(.detailScreen(object: object))
                 }
             })
             .disposed(by: disposeBag)
