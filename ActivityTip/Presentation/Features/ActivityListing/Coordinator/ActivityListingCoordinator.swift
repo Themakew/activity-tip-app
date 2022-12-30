@@ -26,9 +26,9 @@ final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRou
         case .home:
             let service = ServiceAPICall()
             let serviceAPI = ActivityAPIService(serviceAPI: service)
-            let eventListRepository = ActivityListingRepository(activityAPIService: serviceAPI)
-            let eventListUseCase = ActivityListingUseCase(activityListingRepository: eventListRepository)
-            let viewModel = ActivityListingViewModel()
+            let activityListingRepository = ActivityListingRepository(activityAPIService: serviceAPI)
+            let activityListingUseCase = ActivityListingUseCase(activityListingRepository: activityListingRepository)
+            let viewModel = ActivityListingViewModel(activityListingUseCase: activityListingUseCase)
             let viewController = ActivityListingViewController(viewModel: viewModel)
             return .push(viewController)
         }

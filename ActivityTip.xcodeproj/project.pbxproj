@@ -13,7 +13,7 @@
 		565464F6295E0A2B007B3B5D /* XCoordinatorRx in Frameworks */ = {isa = PBXBuildFile; productRef = 565464F5295E0A2B007B3B5D /* XCoordinatorRx */; };
 		565464FB295E0D2C007B3B5D /* ServiceAPICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565464FA295E0D2C007B3B5D /* ServiceAPICall.swift */; };
 		565464FD295E1092007B3B5D /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565464FC295E1092007B3B5D /* APIRequest.swift */; };
-		56546500295E1156007B3B5D /* Encodable+misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565464FF295E1156007B3B5D /* Encodable+misc.swift */; };
+		56546500295E1156007B3B5D /* Encodable+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565464FF295E1156007B3B5D /* Encodable+Misc.swift */; };
 		56546503295E2864007B3B5D /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 56546502295E2864007B3B5D /* RxBlocking */; };
 		56546505295E2864007B3B5D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 56546504295E2864007B3B5D /* RxCocoa */; };
 		56546507295E2864007B3B5D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 56546506295E2864007B3B5D /* RxRelay */; };
@@ -26,6 +26,10 @@
 		56546524295E49DD007B3B5D /* ActivityListingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546523295E49DD007B3B5D /* ActivityListingCoordinator.swift */; };
 		56546526295E49EC007B3B5D /* ActivityListingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546525295E49EC007B3B5D /* ActivityListingViewModel.swift */; };
 		56546528295E49F9007B3B5D /* ActivityListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546527295E49F9007B3B5D /* ActivityListingViewController.swift */; };
+		5654652C295E6AE9007B3B5D /* Rx+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654652B295E6AE9007B3B5D /* Rx+Misc.swift */; };
+		5654652F295E6DB5007B3B5D /* ActivityEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5654652E295E6DB5007B3B5D /* ActivityEntity.swift */; };
+		56546531295E71FE007B3B5D /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546530295E71FE007B3B5D /* ErrorResponse.swift */; };
+		56546534295E7725007B3B5D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56546533295E7725007B3B5D /* NetworkError.swift */; };
 		5659148E295DC5B100ECE275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5659148D295DC5B100ECE275 /* AppDelegate.swift */; };
 		56591498295DC5B100ECE275 /* ActivityTip.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56591496295DC5B100ECE275 /* ActivityTip.xcdatamodeld */; };
 		5659149A295DC5B300ECE275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56591499295DC5B300ECE275 /* Assets.xcassets */; };
@@ -35,7 +39,7 @@
 /* Begin PBXFileReference section */
 		565464FA295E0D2C007B3B5D /* ServiceAPICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPICall.swift; sourceTree = "<group>"; };
 		565464FC295E1092007B3B5D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		565464FF295E1156007B3B5D /* Encodable+misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+misc.swift"; sourceTree = "<group>"; };
+		565464FF295E1156007B3B5D /* Encodable+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Misc.swift"; sourceTree = "<group>"; };
 		5654650A295E4363007B3B5D /* ActivityAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAPIService.swift; sourceTree = "<group>"; };
 		5654650D295E4451007B3B5D /* ActivityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityResponse.swift; sourceTree = "<group>"; };
 		56546511295E4779007B3B5D /* ActivityListingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListingRepository.swift; sourceTree = "<group>"; };
@@ -44,6 +48,10 @@
 		56546523295E49DD007B3B5D /* ActivityListingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListingCoordinator.swift; sourceTree = "<group>"; };
 		56546525295E49EC007B3B5D /* ActivityListingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListingViewModel.swift; sourceTree = "<group>"; };
 		56546527295E49F9007B3B5D /* ActivityListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityListingViewController.swift; sourceTree = "<group>"; };
+		5654652B295E6AE9007B3B5D /* Rx+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Misc.swift"; sourceTree = "<group>"; };
+		5654652E295E6DB5007B3B5D /* ActivityEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityEntity.swift; sourceTree = "<group>"; };
+		56546530295E71FE007B3B5D /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		56546533295E7725007B3B5D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		5659148A295DC5B100ECE275 /* ActivityTip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ActivityTip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5659148D295DC5B100ECE275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56591497295DC5B100ECE275 /* ActivityTip.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ActivityTip.xcdatamodel; sourceTree = "<group>"; };
@@ -82,9 +90,9 @@
 		565464DB295DCE47007B3B5D /* Infrastruture */ = {
 			isa = PBXGroup;
 			children = (
+				5654652D295E6C75007B3B5D /* Coredata */,
 				565464F7295E0C57007B3B5D /* Network */,
 				565464FE295E1133007B3B5D /* Extensions */,
-				56591496295DC5B100ECE275 /* ActivityTip.xcdatamodeld */,
 			);
 			name = Infrastruture;
 			sourceTree = "<group>";
@@ -136,6 +144,7 @@
 		565464F7295E0C57007B3B5D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				56546532295E76D0007B3B5D /* Protocols */,
 				5654650F295E4725007B3B5D /* Models */,
 				565464F8295E0CE2007B3B5D /* Base */,
 				565464F9295E0CE8007B3B5D /* Services */,
@@ -163,7 +172,7 @@
 		565464FE295E1133007B3B5D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				565464FF295E1156007B3B5D /* Encodable+misc.swift */,
+				565464FF295E1156007B3B5D /* Encodable+Misc.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -172,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				5654650D295E4451007B3B5D /* ActivityResponse.swift */,
+				56546530295E71FE007B3B5D /* ErrorResponse.swift */,
 			);
 			name = Response;
 			sourceTree = "<group>";
@@ -203,6 +213,7 @@
 		56546514295E4829007B3B5D /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				5654652E295E6DB5007B3B5D /* ActivityEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -275,6 +286,8 @@
 		5654651F295E49B7007B3B5D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5654652A295E6AC7007B3B5D /* Extensions */,
+				56546529295E613E007B3B5D /* Protocols */,
 				56546520295E49BE007B3B5D /* Navigation */,
 			);
 			path = Shared;
@@ -286,6 +299,37 @@
 				56546521295E49CA007B3B5D /* AppCoordinator.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		56546529295E613E007B3B5D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		5654652A295E6AC7007B3B5D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5654652B295E6AE9007B3B5D /* Rx+Misc.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5654652D295E6C75007B3B5D /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				56591496295DC5B100ECE275 /* ActivityTip.xcdatamodeld */,
+			);
+			name = Coredata;
+			sourceTree = "<group>";
+		};
+		56546532295E76D0007B3B5D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				56546533295E7725007B3B5D /* NetworkError.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		56591481295DC5B100ECE275 = {
@@ -404,19 +448,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56546534295E7725007B3B5D /* NetworkError.swift in Sources */,
 				5659148E295DC5B100ECE275 /* AppDelegate.swift in Sources */,
 				565464FB295E0D2C007B3B5D /* ServiceAPICall.swift in Sources */,
 				56546522295E49CA007B3B5D /* AppCoordinator.swift in Sources */,
 				56546524295E49DD007B3B5D /* ActivityListingCoordinator.swift in Sources */,
 				56546512295E4779007B3B5D /* ActivityListingRepository.swift in Sources */,
 				5654650B295E4363007B3B5D /* ActivityAPIService.swift in Sources */,
-				56546500295E1156007B3B5D /* Encodable+misc.swift in Sources */,
+				5654652F295E6DB5007B3B5D /* ActivityEntity.swift in Sources */,
+				56546531295E71FE007B3B5D /* ErrorResponse.swift in Sources */,
+				56546500295E1156007B3B5D /* Encodable+Misc.swift in Sources */,
 				56546528295E49F9007B3B5D /* ActivityListingViewController.swift in Sources */,
 				5654650E295E4451007B3B5D /* ActivityResponse.swift in Sources */,
 				56546526295E49EC007B3B5D /* ActivityListingViewModel.swift in Sources */,
 				56546516295E489A007B3B5D /* ActivityListingUseCase.swift in Sources */,
 				565464FD295E1092007B3B5D /* APIRequest.swift in Sources */,
 				56591498295DC5B100ECE275 /* ActivityTip.xcdatamodeld in Sources */,
+				5654652C295E6AE9007B3B5D /* Rx+Misc.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@ import RxAlamofire
 import RxSwift
 
 protocol ServiceAPICallProtocol {
-    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<T>
+    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<Result<T, NetworkError>>
 }
 
 final class ServiceAPICall: ServiceAPICallProtocol {
@@ -28,33 +28,39 @@ final class ServiceAPICall: ServiceAPICallProtocol {
 
     // MARK: Internal Methods
 
-    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<T> {
+    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<Result<T, NetworkError>> {
         return session.rx.request(request.method, request.url)
             .responseData()
-            .map { response, data -> Data in
-                return data
-            }
-            .flatMapLatest { data -> Observable<T> in
+            .flatMapLatest { response, data -> Observable<Result<T, NetworkError>> in
                 let decoder = JSONDecoder()
 
                 do {
-                    return Observable<T>.create { observer in
-                        do {
-                            let object = try decoder.decode(T.self, from: data)
-                            observer.onNext(object)
-                            observer.onCompleted()
-                        } catch {
-                            observer.onError(error)
+                    return Observable<Result<T, NetworkError>>.create { observer in
+                        let errorMessage = try? decoder.decode(ErrorResponse.self, from: data).error
+
+                        if (errorMessage ?? "").isEmpty {
+                            do {
+                                let object = try decoder.decode(T.self, from: data)
+                                observer.onNext(.success(object))
+                            } catch {
+                                observer.onNext(
+                                    .failure(
+                                        NetworkError.decodeError(
+                                            description: "Decoding the reponse to the object \(T.self) failed."
+                                        )
+                                    )
+                                )
+                            }
+                        } else {
+                            observer.onNext(
+                                .failure(NetworkError.genericError(description: errorMessage))
+                            )
                         }
 
+                        observer.onCompleted()
                         return Disposables.create()
                     }
                 }
-            }.catch { error in
-                print("❌ - Finished With Error")
-                print("Message - \(error)")
-
-                throw error
             }
     }
 }

@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol ActivityListingRepositoryProtocol {
-    func getActivityList() -> Single<ActivityResponse>
+    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>>
 }
 
 final class ActivityListingRepository: ActivityListingRepositoryProtocol {
@@ -25,7 +25,7 @@ final class ActivityListingRepository: ActivityListingRepositoryProtocol {
 
     // MARK: Internal Methods
 
-    func getActivityList() -> Single<ActivityResponse> {
+    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>> {
         return activityAPIService.getResponseFromActivityEndPoint()
     }
 }

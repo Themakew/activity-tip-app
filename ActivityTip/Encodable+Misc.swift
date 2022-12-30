@@ -1,5 +1,5 @@
 //
-//  Encodable+misc.swift
+//  Encodable+Misc.swift
 //  ActivityTip
 //
 //  Created by Ruyther Costa on 29/12/22.

@@ -31,4 +31,9 @@ final class ActivityListingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .red
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.input.getActivityTip.accept(())
+    }
 }

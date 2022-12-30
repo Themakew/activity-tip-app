@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol ActivityListingUseCaseProtocol {
-    func getActivityList() -> Single<ActivityResponse>
+    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>>
 }
 
 final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
@@ -25,7 +25,7 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
 
     // MARK: Internal Methods
 
-    func getActivityList() -> Single<ActivityResponse> {
-        return activityListingRepository.getActivityList()
+    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>> {
+        return activityListingRepository.getActivityTip()
     }
 }
