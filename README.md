@@ -11,11 +11,12 @@ ActivityTip is a simple app to sample some basic features, such as: API integrat
 
 ## Technologies and tools used
 
-- Swift
-- RxSwift
-- UIKit
-- XCoordinator
-- CoreData
+- Swift: program language
+- RxSwift: for biding the data using the MVVM-C
+- UIKit: for building screen programatically
+- XCoordinator: for organize the app navigation
+- CoreData: save the activity info
+- AlamofireNetworkActivityLogger: for display the requests log in xcode console
 
 ## Architecture used
 
@@ -33,7 +34,6 @@ It is quite straightforward; it simply opens the ".xcodeproj" file, waits for SP
 ## TODO (Future Work)
 
 - List the user's saved activities, where he can see all his saved activities and open the details of the selected activity.
-- Instead of receiving only random activities from the API, filter for an activity on the main screen.
 
 ---
 <p align="center">Made by Ruyther Costa | Find me on <a href="https://www.linkedin.com/in/ruyther">LinkedIn</a></p>
