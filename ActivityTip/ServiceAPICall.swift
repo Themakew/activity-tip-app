@@ -11,7 +11,7 @@ import RxAlamofire
 import RxSwift
 
 protocol ServiceAPICallProtocol {
-    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<Result<T, NetworkError>>
+    func request<T: Decodable>(request: APIRequest, type: T.Type, parameters: Parameters?) -> Observable<Result<T, NetworkError>>
 }
 
 final class ServiceAPICall: ServiceAPICallProtocol {
@@ -28,8 +28,8 @@ final class ServiceAPICall: ServiceAPICallProtocol {
 
     // MARK: Internal Methods
 
-    func request<T: Decodable>(request: APIRequest, type: T.Type) -> Observable<Result<T, NetworkError>> {
-        return session.rx.request(request.method, request.url)
+    func request<T: Decodable>(request: APIRequest, type: T.Type, parameters: Parameters?) -> Observable<Result<T, NetworkError>> {
+        return session.rx.request(request.method, request.url, parameters: parameters)
             .responseData()
             .flatMapLatest { response, data -> Observable<Result<T, NetworkError>> in
                 let decoder = JSONDecoder()

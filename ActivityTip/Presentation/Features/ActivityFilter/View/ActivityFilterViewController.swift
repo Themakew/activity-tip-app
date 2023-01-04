@@ -28,6 +28,7 @@ final class ActivityFilterViewController: UIViewController {
     private let participantTextField = UITextField(translateMask: false).apply {
         $0.keyboardType = .numberPad
         $0.backgroundColor = .gray.withAlphaComponent(0.1)
+        $0.text = "1"
     }
 
     private let budgetLabel = UILabel(translateMask: false).apply {

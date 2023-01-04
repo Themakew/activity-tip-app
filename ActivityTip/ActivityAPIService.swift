@@ -9,7 +9,7 @@ import Alamofire
 import RxSwift
 
 protocol ActivityAPIServiceProtocol {
-    func getResponseFromActivityEndPoint() -> Single<Result<ActivityResponse, NetworkError>>
+    func getResponseFromActivityEndPoint(parameters: Parameters?) -> Single<Result<ActivityResponse, NetworkError>>
 }
 
 enum ActivityAPICall {
@@ -37,8 +37,12 @@ final class ActivityAPIService: ActivityAPIServiceProtocol {
 
     // MARK: Internal Methods
 
-    func getResponseFromActivityEndPoint() -> Single<Result<ActivityResponse, NetworkError>> {
-        return serviceAPI.request(request: ActivityAPICall.activity.path, type: ActivityResponse.self)
+    func getResponseFromActivityEndPoint(parameters: Parameters?) -> Single<Result<ActivityResponse, NetworkError>> {
+        return serviceAPI.request(
+            request: ActivityAPICall.activity.path,
+            type: ActivityResponse.self,
+            parameters: parameters
+        )
             .asSingle()
     }
 }

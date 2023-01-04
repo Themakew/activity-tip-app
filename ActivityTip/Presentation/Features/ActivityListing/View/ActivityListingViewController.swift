@@ -55,6 +55,14 @@ final class ActivityListingViewController: UIViewController {
         $0.tintColor = .black
     }
 
+    private let errorMessageLabel = UILabel(translateMask: false).apply {
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.tintColor = .black
+        $0.textAlignment = .center
+        $0.numberOfLines = 0
+        $0.isHidden = true
+    }
+
     // MARK: - Initializers
 
     init(viewModel: ActivityListingViewModelProtocol) {
@@ -102,7 +110,12 @@ final class ActivityListingViewController: UIViewController {
             .disposed(by: disposeBag)
 
         viewModel.output.filterNavButtonTitleText
+            .asDriver(onErrorJustReturn: "")
             .drive(filterNavButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
+        viewModel.output.errorMessageLabelText
+            .drive(errorMessageLabel.rx.text)
             .disposed(by: disposeBag)
 
         addDetailsButton.rx.tap
@@ -125,7 +138,18 @@ final class ActivityListingViewController: UIViewController {
             .subscribe(onNext: { [weak self] data in
                 self?.spinnerView.isHidden = true
                 self?.addDetailsButton.isEnabled = true
+                self?.activityView.isHidden = false
+                self?.errorMessageLabel.isHidden = true
                 self?.activityView.configure(content: data)
+            })
+            .disposed(by: disposeBag)
+
+        viewModel.output.setErrorAlert
+            .subscribe(onNext: { [weak self] message in
+                self?.spinnerView.isHidden = true
+                self?.addDetailsButton.isEnabled = false
+                self?.activityView.isHidden = true
+                self?.errorMessageLabel.isHidden = false
             })
             .disposed(by: disposeBag)
     }
@@ -144,6 +168,7 @@ extension ActivityListingViewController: ViewCode {
         view.addSubview(activityView)
         view.addSubview(addDetailsButton)
         view.addSubview(anotherTipButton)
+        view.addSubview(errorMessageLabel)
 
         activityView.addSubview(spinnerView)
     }
@@ -174,7 +199,11 @@ extension ActivityListingViewController: ViewCode {
             anotherTipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
 
             spinnerView.centerXAnchor.constraint(equalTo: activityView.centerXAnchor),
-            spinnerView.centerYAnchor.constraint(equalTo: activityView.centerYAnchor)
+            spinnerView.centerYAnchor.constraint(equalTo: activityView.centerYAnchor),
+
+            errorMessageLabel.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 30),
+            errorMessageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            errorMessageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
     }
 

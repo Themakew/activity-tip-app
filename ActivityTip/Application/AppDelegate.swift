@@ -5,6 +5,7 @@
 //  Created by Ruyther Costa on 29/12/22.
 //
 
+import AlamofireNetworkActivityLogger
 import UIKit
 import CoreData
 
@@ -44,6 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal Methods
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        NetworkActivityLogger.shared.startLogging()
+
         configureUI()
         mainWindow.backgroundColor = .white
         router.setRoot(for: mainWindow)

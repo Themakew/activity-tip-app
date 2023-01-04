@@ -28,7 +28,9 @@ protocol ActivityListingViewModelOutput {
     var subTitleText: Driver<String> { get }
     var addDetailButtonTitleText: Driver<String> { get }
     var anotherTipButtonTitleText: Driver<String> { get }
-    var filterNavButtonTitleText: Driver<String> { get }
+    var errorMessageLabelText: Driver<String> { get }
+    var setErrorAlert: PublishRelay<Void> { get }
+    var filterNavButtonTitleText: BehaviorRelay<String> { get }
 }
 
 extension ActivityListingViewModelProtocol where Self: ActivityListingViewModelInput & ActivityListingViewModelOutput {
@@ -52,12 +54,15 @@ final class ActivityListingViewModel:
 
     // Outputs
     let data = PublishRelay<ActivityInfoEntity>()
+    let setErrorAlert = PublishRelay<Void>()
 
     let titleText: Driver<String> = .just("Are you bored?")
     let subTitleText: Driver<String> = .just("Here an exercise tip for you now")
     let addDetailButtonTitleText: Driver<String> = .just("Add Details")
     let anotherTipButtonTitleText: Driver<String> = .just("New Activity Tip")
-    let filterNavButtonTitleText: Driver<String> = .just("Filter")
+    let errorMessageLabelText: Driver<String> = .just("No activity Found. Tip: try to clear the filters")
+
+    var filterNavButtonTitleText = BehaviorRelay<String>(value: "Filter")
 
     // MARK: - Private Properties
 
@@ -65,6 +70,7 @@ final class ActivityListingViewModel:
     private let router: WeakRouter<ActivityListingRouter>
 
     private let activityData = BehaviorRelay<ActivityInfoEntity?>(value: nil)
+    private let filter = BehaviorRelay<ActivityFilter?>(value: nil)
 
     // MARK: - Initializer
 
@@ -83,7 +89,7 @@ final class ActivityListingViewModel:
     private func bindRx() {
         let responseResultObservable = getActivityTip
             .flatMap(weak: self) { this, _ -> Observable<Result<ActivityInfoEntity, NetworkError>> in
-                return this.activityListingUseCase.getActivityTip()
+                return this.activityListingUseCase.getActivityTip(parameters: this.filter.value)
                     .asObservable()
             }
             .share()
@@ -95,10 +101,16 @@ final class ActivityListingViewModel:
                 case let .success(response):
                     self.activityData.accept(response)
                     self.data.accept(response)
-                case let .failure(error):
-                    print(error)
+                case .failure(_):
+                    self.setErrorAlert.accept(())
                 }
             })
+            .disposed(by: disposeBag)
+
+        filter
+            .skip(1)
+            .map { _ in () }
+            .bind(to: getActivityTip)
             .disposed(by: disposeBag)
 
         openDetailScreen
@@ -111,13 +123,40 @@ final class ActivityListingViewModel:
             .disposed(by: disposeBag)
 
         openFilterScreen
-            .subscribe(onNext: { [weak self] in
-                guard let self else {
-                    return
-                }
+            .withLatestFrom(filter)
+            .subscribe(onNext: { [weak self] object in
+                if object == nil {
+                    guard let self else {
+                        return
+                    }
 
-                let viewModel = ActivityFilterViewModel(router: self.router)
-                self.router.trigger(.filterScreen(viewModel: viewModel))
+                    let viewModel = ActivityFilterViewModel(router: self.router)
+
+                    viewModel.filterApplied
+                        .bind(to: self.filter)
+                        .disposed(by: self.disposeBag)
+
+                    self.router.trigger(.filterScreen(viewModel: viewModel))
+                }
+            })
+            .disposed(by: disposeBag)
+
+        openFilterScreen
+            .withLatestFrom(filter)
+            .subscribe(onNext: { [weak self] object in
+                if object != nil {
+                    self?.filter.accept(nil)
+                }
+            })
+            .disposed(by: disposeBag)
+
+        filter
+            .subscribe(onNext: { [weak self] object in
+                if object == nil {
+                    self?.filterNavButtonTitleText.accept("Filter")
+                } else {
+                    self?.filterNavButtonTitleText.accept("Clear Filter")
+                }
             })
             .disposed(by: disposeBag)
     }

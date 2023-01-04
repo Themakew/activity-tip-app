@@ -110,6 +110,24 @@ final class ActivityDetailViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+
+        viewModel.output.showSuccessAlert
+            .subscribe(onNext: { [weak self] object in
+                if let object {
+                    self?.showAlert(object: object)
+                }
+            })
+            .disposed(by: disposeBag)
+    }
+
+    private func showAlert(object: AlertEntity) {
+        let alert = UIAlertController(
+            title: object.title,
+            message: object.message,
+            preferredStyle: object.preferredStyle
+        )
+        alert.addAction(UIAlertAction(title: object.actionTitle, style: object.actionStyle, handler: nil))
+        present(alert, animated: true)
     }
 }
 

@@ -101,7 +101,11 @@ final class ActivityFilterViewModel:
             })
             .disposed(by: disposeBag)
 
-        let filter = Observable.combineLatest(participantValue.map { Int($0 ?? "") }, budgetValue, activityType)
+        let filter = Observable.combineLatest(
+            participantValue.map { Int($0 ?? "") },
+            budgetValue.map { $0?.toOneDecimal() },
+            activityType
+        )
         applyFilter
             .withLatestFrom(filter)
             .map { filter -> ActivityFilter in
@@ -109,5 +113,11 @@ final class ActivityFilterViewModel:
             }
             .bind(to: filterApplied)
             .disposed(by: disposeBag)
+
+        applyFilter
+            .subscribe(onNext: { [weak self] in
+            self?.router.trigger(.dismiss)
+        })
+        .disposed(by: disposeBag)
     }
 }

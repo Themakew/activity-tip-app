@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol ActivityListingRepositoryProtocol {
-    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>>
+    func getActivityTip(parameters: ActivityFilter?) -> Single<Result<ActivityResponse, NetworkError>>
 }
 
 final class ActivityListingRepository: ActivityListingRepositoryProtocol {
@@ -25,7 +25,21 @@ final class ActivityListingRepository: ActivityListingRepositoryProtocol {
 
     // MARK: Internal Methods
 
-    func getActivityTip() -> Single<Result<ActivityResponse, NetworkError>> {
-        return activityAPIService.getResponseFromActivityEndPoint()
+    func getActivityTip(parameters: ActivityFilter?) -> Single<Result<ActivityResponse, NetworkError>> {
+        guard let parameters else {
+            return activityAPIService.getResponseFromActivityEndPoint(parameters: nil)
+        }
+
+        let dictParams = getDictParams(parameters: parameters)
+        return activityAPIService.getResponseFromActivityEndPoint(parameters: dictParams)
+    }
+
+    private func getDictParams(parameters: ActivityFilter) -> [String: Any] {
+        let dict = [
+            "participant": parameters.numberOfParticipants?.description ?? "1",
+            "price": parameters.budgetNumber?.description ?? "0.5",
+            "type": parameters.type?.rawValue ?? "education"
+        ]
+        return dict
     }
 }

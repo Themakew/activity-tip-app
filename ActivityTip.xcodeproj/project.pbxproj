@@ -11,6 +11,9 @@
 		564672092964D822008E5937 /* ActivityFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564672082964D822008E5937 /* ActivityFilterViewModel.swift */; };
 		5646720B296502F0008E5937 /* UIViewController+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5646720A296502F0008E5937 /* UIViewController+Misc.swift */; };
 		5646720D296505EC008E5937 /* ActivityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5646720C296505EC008E5937 /* ActivityFilter.swift */; };
+		5646721029651B57008E5937 /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 5646720F29651B57008E5937 /* AlamofireNetworkActivityLogger */; };
+		564672122965A766008E5937 /* AlertEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564672112965A766008E5937 /* AlertEntity.swift */; };
+		564672142965AA30008E5937 /* Float+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564672132965AA30008E5937 /* Float+Misc.swift */; };
 		565464E3295E098D007B3B5D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 565464E2295E098D007B3B5D /* Alamofire */; };
 		565464E6295E099C007B3B5D /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 565464E5295E099C007B3B5D /* RxAlamofire */; };
 		565464F4295E0A2B007B3B5D /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 565464F3295E0A2B007B3B5D /* XCoordinator */; };
@@ -57,6 +60,8 @@
 		564672082964D822008E5937 /* ActivityFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilterViewModel.swift; sourceTree = "<group>"; };
 		5646720A296502F0008E5937 /* UIViewController+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Misc.swift"; sourceTree = "<group>"; };
 		5646720C296505EC008E5937 /* ActivityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilter.swift; sourceTree = "<group>"; };
+		564672112965A766008E5937 /* AlertEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertEntity.swift; sourceTree = "<group>"; };
+		564672132965AA30008E5937 /* Float+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Misc.swift"; sourceTree = "<group>"; };
 		565464FA295E0D2C007B3B5D /* ServiceAPICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPICall.swift; sourceTree = "<group>"; };
 		565464FC295E1092007B3B5D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		565464FF295E1156007B3B5D /* Encodable+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Misc.swift"; sourceTree = "<group>"; };
@@ -100,6 +105,7 @@
 				56546505295E2864007B3B5D /* RxCocoa in Frameworks */,
 				565464F4295E0A2B007B3B5D /* XCoordinator in Frameworks */,
 				56546507295E2864007B3B5D /* RxRelay in Frameworks */,
+				5646721029651B57008E5937 /* AlamofireNetworkActivityLogger in Frameworks */,
 				565464F6295E0A2B007B3B5D /* XCoordinatorRx in Frameworks */,
 				565464E3295E098D007B3B5D /* Alamofire in Frameworks */,
 				565464E6295E099C007B3B5D /* RxAlamofire in Frameworks */,
@@ -277,6 +283,7 @@
 				5654653D295F0575007B3B5D /* ActivityInfoEntity.swift */,
 				5654654C295F6874007B3B5D /* ActivityStatusEntity.swift */,
 				5646720C296505EC008E5937 /* ActivityFilter.swift */,
+				564672112965A766008E5937 /* AlertEntity.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -383,6 +390,7 @@
 				5654652B295E6AE9007B3B5D /* Rx+Misc.swift */,
 				5654653F295F0EE3007B3B5D /* UIView+Misc.swift */,
 				5646720A296502F0008E5937 /* UIViewController+Misc.swift */,
+				564672132965AA30008E5937 /* Float+Misc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -483,6 +491,7 @@
 				56546504295E2864007B3B5D /* RxCocoa */,
 				56546506295E2864007B3B5D /* RxRelay */,
 				56546508295E2864007B3B5D /* RxSwift */,
+				5646720F29651B57008E5937 /* AlamofireNetworkActivityLogger */,
 			);
 			productName = ActivityTip;
 			productReference = 5659148A295DC5B100ECE275 /* ActivityTip.app */;
@@ -517,6 +526,7 @@
 				565464E4295E099C007B3B5D /* XCRemoteSwiftPackageReference "RxAlamofire" */,
 				565464F2295E0A2B007B3B5D /* XCRemoteSwiftPackageReference "XCoordinator" */,
 				56546501295E2864007B3B5D /* XCRemoteSwiftPackageReference "RxSwift" */,
+				5646720E29651B57008E5937 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 			);
 			productRefGroup = 5659148B295DC5B100ECE275 /* Products */;
 			projectDirPath = "";
@@ -565,12 +575,14 @@
 				56546549295F3A32007B3B5D /* ActivityDetailViewModel.swift in Sources */,
 				56546500295E1156007B3B5D /* Encodable+Misc.swift in Sources */,
 				56546528295E49F9007B3B5D /* ActivityListingViewController.swift in Sources */,
+				564672142965AA30008E5937 /* Float+Misc.swift in Sources */,
 				56546536295EFDE0007B3B5D /* ViewCode.swift in Sources */,
 				5654650E295E4451007B3B5D /* ActivityResponse.swift in Sources */,
 				56546555295F83B7007B3B5D /* ActivityDetailUseCase.swift in Sources */,
 				5654653A295F0360007B3B5D /* ActivityView.swift in Sources */,
 				564672092964D822008E5937 /* ActivityFilterViewModel.swift in Sources */,
 				56546516295E489A007B3B5D /* ActivityListingUseCase.swift in Sources */,
+				564672122965A766008E5937 /* AlertEntity.swift in Sources */,
 				5654653E295F0575007B3B5D /* ActivityInfoEntity.swift in Sources */,
 				565464FD295E1092007B3B5D /* APIRequest.swift in Sources */,
 				56591498295DC5B100ECE275 /* ActivityTip.xcdatamodeld in Sources */,
@@ -788,6 +800,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5646720E29651B57008E5937 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/konkab/AlamofireNetworkActivityLogger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.4.0;
+			};
+		};
 		565464E1295E098D007B3B5D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -823,6 +843,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5646720F29651B57008E5937 /* AlamofireNetworkActivityLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5646720E29651B57008E5937 /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
+			productName = AlamofireNetworkActivityLogger;
+		};
 		565464E2295E098D007B3B5D /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 565464E1295E098D007B3B5D /* XCRemoteSwiftPackageReference "Alamofire" */;

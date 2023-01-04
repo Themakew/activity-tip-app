@@ -29,6 +29,7 @@ protocol ActivityDetailViewModelOutput {
     var activityTipText: Driver<String> { get }
     var timeText: Driver<String> { get }
     var saveButtonTitleText: Driver<String> { get }
+    var showSuccessAlert: BehaviorRelay<AlertEntity?> { get }
 }
 
 extension ActivityDetailViewModelProtocol where Self: ActivityDetailViewModelInput & ActivityDetailViewModelOutput {
@@ -51,6 +52,7 @@ final class ActivityDetailViewModel:
 
     // Outputs
     let activityData = BehaviorRelay<ActivityInfoEntity?>(value: nil)
+    let showSuccessAlert = BehaviorRelay<AlertEntity?>(value: nil)
 
     let viewTitleText: Driver<String> = .just("Activity Detail")
     let activityTipText: Driver<String> = .just("Enter your current status:")
@@ -103,6 +105,7 @@ final class ActivityDetailViewModel:
 
                 if let activityData = this.activityData.value {
                     this.activityDetailUseCase.saveData(data: (activityData.activityInfo, activityStatusEntity))
+                    this.showSuccessAlert.accept(this.getAlertEntity())
                 }
             })
             .disposed(by: disposeBag)
@@ -113,5 +116,14 @@ final class ActivityDetailViewModel:
         formatter.unitsStyle = .spellOut
         formatter.allowedUnits = [.hour, .minute]
         return formatter.string(from: interval) ?? ""
+    }
+
+    private func getAlertEntity() -> AlertEntity {
+        return AlertEntity(
+            title: "Success",
+            message: "Activity info saved",
+            preferredStyle: .alert,
+            actionTitle: "Ok"
+        )
     }
 }
