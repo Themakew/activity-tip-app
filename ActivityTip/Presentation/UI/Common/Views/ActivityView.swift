@@ -20,6 +20,7 @@ final class ActivityView: UIView {
         $0.font = UIFont.boldSystemFont(ofSize: 13)
         $0.textAlignment = .center
         $0.lineBreakMode = .byTruncatingTail
+        $0.numberOfLines = 0
     }
 
     private let activityAccessibilityLabel = UILabel(translateMask: false).apply {

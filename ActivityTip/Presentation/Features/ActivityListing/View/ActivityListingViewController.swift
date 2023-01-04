@@ -33,6 +33,7 @@ final class ActivityListingViewController: UIViewController {
 
     private let addDetailsButton = UIButton(type: .system).apply {
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isEnabled = false
         $0.tintColor = .white
         $0.backgroundColor = .blue
     }
@@ -47,6 +48,11 @@ final class ActivityListingViewController: UIViewController {
         $0.style = .medium
         $0.startAnimating()
         $0.isHidden = true
+    }
+
+    private let filterNavButton = UIButton(type: .system).apply {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.tintColor = .black
     }
 
     // MARK: - Initializers
@@ -66,6 +72,7 @@ final class ActivityListingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupNavigationBar()
         bindRx()
     }
 
@@ -94,13 +101,22 @@ final class ActivityListingViewController: UIViewController {
             .drive(anotherTipButton.rx.title(for: .normal))
             .disposed(by: disposeBag)
 
+        viewModel.output.filterNavButtonTitleText
+            .drive(filterNavButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
         addDetailsButton.rx.tap
             .bind(to: viewModel.input.openDetailScreen)
+            .disposed(by: disposeBag)
+
+        filterNavButton.rx.tap
+            .bind(to: viewModel.input.openFilterScreen)
             .disposed(by: disposeBag)
 
         anotherTipButton.rx.tap
             .do(onNext: { [weak self] _ in
                 self?.spinnerView.isHidden = false
+                self?.addDetailsButton.isEnabled = false
             })
             .bind(to: viewModel.input.getActivityTip)
             .disposed(by: disposeBag)
@@ -108,9 +124,14 @@ final class ActivityListingViewController: UIViewController {
         viewModel.output.data
             .subscribe(onNext: { [weak self] data in
                 self?.spinnerView.isHidden = true
+                self?.addDetailsButton.isEnabled = true
                 self?.activityView.configure(content: data)
             })
             .disposed(by: disposeBag)
+    }
+
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: filterNavButton)
     }
 }
 
@@ -140,8 +161,8 @@ extension ActivityListingViewController: ViewCode {
             activityView.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 30),
             activityView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             activityView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityView.bottomAnchor.constraint(lessThanOrEqualTo: addDetailsButton.topAnchor, constant: -30),
 
-            addDetailsButton.topAnchor.constraint(equalTo: activityView.bottomAnchor, constant: 30),
             addDetailsButton.heightAnchor.constraint(equalToConstant: 30),
             addDetailsButton.widthAnchor.constraint(equalToConstant: 150),
             addDetailsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -150,6 +171,7 @@ extension ActivityListingViewController: ViewCode {
             anotherTipButton.heightAnchor.constraint(equalToConstant: 30),
             anotherTipButton.widthAnchor.constraint(equalToConstant: 150),
             anotherTipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            anotherTipButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
 
             spinnerView.centerXAnchor.constraint(equalTo: activityView.centerXAnchor),
             spinnerView.centerYAnchor.constraint(equalTo: activityView.centerYAnchor)

@@ -11,8 +11,8 @@ protocol ActivityListingUseCaseProtocol {
     func getActivityTip() -> Single<Result<ActivityInfoEntity, NetworkError>>
 }
 
-enum ActivityType: String {
-    case education, recreational, social, diy, charity, cooking, relaxation, music, busywork, none
+enum ActivityType: String, CaseIterable {
+    case education, recreational, social, diy, charity, cooking, relaxation, music, busywork
 }
 
 enum BudgetType: String {
@@ -41,7 +41,7 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
                     let activityEntity = ActivityEntity(
                         activity: object.activity ?? "",
                         accessibility: self?.getAccessibilityPercentage(value: object.accessibility) ?? "",
-                        type: self?.getType(type: object.type) ?? .none,
+                        type: self?.getType(type: object.type) ?? .education,
                         participants: object.participants,
                         price: self?.getBudgetType(price: object.price) ?? .none,
                         link: object.link,
@@ -78,7 +78,7 @@ final class ActivityListingUseCase: ActivityListingUseCaseProtocol {
         if let type = ActivityType(rawValue: type ?? "") {
             return type
         } else {
-            return .none
+            return .education
         }
     }
 

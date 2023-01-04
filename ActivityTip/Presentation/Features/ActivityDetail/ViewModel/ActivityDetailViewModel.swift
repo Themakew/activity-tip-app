@@ -60,7 +60,7 @@ final class ActivityDetailViewModel:
     // MARK: - Private Properties
 
     private let disposeBag = DisposeBag()
-    private let router: StrongRouter<ActivityListingRouter>
+    private let router: WeakRouter<ActivityListingRouter>
     private let activityInfoEntity: ActivityInfoEntity
     private let activityDetailUseCase: ActivityDetailUseCaseProtocol
 
@@ -69,7 +69,7 @@ final class ActivityDetailViewModel:
     // MARK: - Initializer
 
     init(
-        router: StrongRouter<ActivityListingRouter>,
+        router: WeakRouter<ActivityListingRouter>,
         activityInfoEntity: ActivityInfoEntity,
         activityDetailUseCase: ActivityDetailUseCaseProtocol
     ) {

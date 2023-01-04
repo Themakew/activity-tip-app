@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		564672072964D808008E5937 /* ActivityFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564672062964D808008E5937 /* ActivityFilterViewController.swift */; };
+		564672092964D822008E5937 /* ActivityFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564672082964D822008E5937 /* ActivityFilterViewModel.swift */; };
+		5646720B296502F0008E5937 /* UIViewController+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5646720A296502F0008E5937 /* UIViewController+Misc.swift */; };
+		5646720D296505EC008E5937 /* ActivityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5646720C296505EC008E5937 /* ActivityFilter.swift */; };
 		565464E3295E098D007B3B5D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 565464E2295E098D007B3B5D /* Alamofire */; };
 		565464E6295E099C007B3B5D /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 565464E5295E099C007B3B5D /* RxAlamofire */; };
 		565464F4295E0A2B007B3B5D /* XCoordinator in Frameworks */ = {isa = PBXBuildFile; productRef = 565464F3295E0A2B007B3B5D /* XCoordinator */; };
@@ -49,6 +53,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		564672062964D808008E5937 /* ActivityFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilterViewController.swift; sourceTree = "<group>"; };
+		564672082964D822008E5937 /* ActivityFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilterViewModel.swift; sourceTree = "<group>"; };
+		5646720A296502F0008E5937 /* UIViewController+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Misc.swift"; sourceTree = "<group>"; };
+		5646720C296505EC008E5937 /* ActivityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFilter.swift; sourceTree = "<group>"; };
 		565464FA295E0D2C007B3B5D /* ServiceAPICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAPICall.swift; sourceTree = "<group>"; };
 		565464FC295E1092007B3B5D /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		565464FF295E1156007B3B5D /* Encodable+Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Misc.swift"; sourceTree = "<group>"; };
@@ -103,6 +111,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		564672032964D6F5008E5937 /* ActivityFilter */ = {
+			isa = PBXGroup;
+			children = (
+				564672042964D7E7008E5937 /* ViewModel */,
+				564672052964D7F0008E5937 /* View */,
+			);
+			path = ActivityFilter;
+			sourceTree = "<group>";
+		};
+		564672042964D7E7008E5937 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				564672082964D822008E5937 /* ActivityFilterViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		564672052964D7F0008E5937 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				564672062964D808008E5937 /* ActivityFilterViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		565464DA295DCE40007B3B5D /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +276,7 @@
 				5654652E295E6DB5007B3B5D /* ActivityEntity.swift */,
 				5654653D295F0575007B3B5D /* ActivityInfoEntity.swift */,
 				5654654C295F6874007B3B5D /* ActivityStatusEntity.swift */,
+				5646720C296505EC008E5937 /* ActivityFilter.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -250,6 +284,7 @@
 		56546517295E48F7007B3B5D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				564672032964D6F5008E5937 /* ActivityFilter */,
 				56546542295F39CC007B3B5D /* ActivityDetail */,
 				5654651B295E492E007B3B5D /* ActivityListing */,
 			);
@@ -347,6 +382,7 @@
 			children = (
 				5654652B295E6AE9007B3B5D /* Rx+Misc.swift */,
 				5654653F295F0EE3007B3B5D /* UIView+Misc.swift */,
+				5646720A296502F0008E5937 /* UIViewController+Misc.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -518,9 +554,12 @@
 				56546522295E49CA007B3B5D /* AppCoordinator.swift in Sources */,
 				56546524295E49DD007B3B5D /* ActivityListingCoordinator.swift in Sources */,
 				56546551295F72C7007B3B5D /* ActivityDetailRepository.swift in Sources */,
+				5646720B296502F0008E5937 /* UIViewController+Misc.swift in Sources */,
+				5646720D296505EC008E5937 /* ActivityFilter.swift in Sources */,
 				56546512295E4779007B3B5D /* ActivityListingRepository.swift in Sources */,
 				5654650B295E4363007B3B5D /* ActivityAPIService.swift in Sources */,
 				5654654B295F3A41007B3B5D /* ActivityDetailViewController.swift in Sources */,
+				564672072964D808008E5937 /* ActivityFilterViewController.swift in Sources */,
 				5654652F295E6DB5007B3B5D /* ActivityEntity.swift in Sources */,
 				56546531295E71FE007B3B5D /* ErrorResponse.swift in Sources */,
 				56546549295F3A32007B3B5D /* ActivityDetailViewModel.swift in Sources */,
@@ -530,6 +569,7 @@
 				5654650E295E4451007B3B5D /* ActivityResponse.swift in Sources */,
 				56546555295F83B7007B3B5D /* ActivityDetailUseCase.swift in Sources */,
 				5654653A295F0360007B3B5D /* ActivityView.swift in Sources */,
+				564672092964D822008E5937 /* ActivityFilterViewModel.swift in Sources */,
 				56546516295E489A007B3B5D /* ActivityListingUseCase.swift in Sources */,
 				5654653E295F0575007B3B5D /* ActivityInfoEntity.swift in Sources */,
 				565464FD295E1092007B3B5D /* APIRequest.swift in Sources */,

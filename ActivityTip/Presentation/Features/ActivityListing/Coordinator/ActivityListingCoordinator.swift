@@ -11,6 +11,7 @@ import UIKit
 enum ActivityListingRouter: Route {
     case home
     case detailScreen(object: ActivityInfoEntity)
+    case filterScreen(viewModel: ActivityFilterViewModelProtocol)
     case dismiss
 }
 
@@ -32,7 +33,7 @@ final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRou
             let activityListingRepository = ActivityListingRepository(activityAPIService: serviceAPI)
             let activityListingUseCase = ActivityListingUseCase(activityListingRepository: activityListingRepository)
             let viewModel = ActivityListingViewModel(
-                router: strongRouter,
+                router: weakRouter,
                 activityListingUseCase: activityListingUseCase
             )
             let viewController = ActivityListingViewController(viewModel: viewModel)
@@ -42,12 +43,16 @@ final class ActivityListingCoordinator: NavigationCoordinator<ActivityListingRou
             let activityDetailRepository = ActivityDetailRepository(coreDataAPIService: coreDataAPIService)
             let activityDetailUseCase = ActivityDetailUseCase(activityDetailRepository: activityDetailRepository)
             let viewModel = ActivityDetailViewModel(
-                router: strongRouter,
+                router: weakRouter,
                 activityInfoEntity: object,
                 activityDetailUseCase: activityDetailUseCase
             )
             let viewController = ActivityDetailViewController(viewModel: viewModel)
             return .push(viewController)
+        case let .filterScreen(viewModel):
+//            let viewModel = ActivityFilterViewModel(router: weakRouter)
+            let viewController = ActivityFilterViewController(viewModel: viewModel)
+            return .present(viewController)
         case .dismiss:
             return .dismiss()
         }

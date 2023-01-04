@@ -19,6 +19,7 @@ protocol ActivityListingViewModelProtocol {
 protocol ActivityListingViewModelInput {
     var getActivityTip: PublishRelay<Void> { get }
     var openDetailScreen: PublishRelay<Void> { get }
+    var openFilterScreen: PublishRelay<Void> { get }
 }
 
 protocol ActivityListingViewModelOutput {
@@ -27,6 +28,7 @@ protocol ActivityListingViewModelOutput {
     var subTitleText: Driver<String> { get }
     var addDetailButtonTitleText: Driver<String> { get }
     var anotherTipButtonTitleText: Driver<String> { get }
+    var filterNavButtonTitleText: Driver<String> { get }
 }
 
 extension ActivityListingViewModelProtocol where Self: ActivityListingViewModelInput & ActivityListingViewModelOutput {
@@ -46,6 +48,7 @@ final class ActivityListingViewModel:
     // Inputs
     let getActivityTip = PublishRelay<Void>()
     let openDetailScreen = PublishRelay<Void>()
+    let openFilterScreen = PublishRelay<Void>()
 
     // Outputs
     let data = PublishRelay<ActivityInfoEntity>()
@@ -54,18 +57,19 @@ final class ActivityListingViewModel:
     let subTitleText: Driver<String> = .just("Here an exercise tip for you now")
     let addDetailButtonTitleText: Driver<String> = .just("Add Details")
     let anotherTipButtonTitleText: Driver<String> = .just("New Activity Tip")
+    let filterNavButtonTitleText: Driver<String> = .just("Filter")
 
     // MARK: - Private Properties
 
     private let disposeBag = DisposeBag()
-    private let router: StrongRouter<ActivityListingRouter>
+    private let router: WeakRouter<ActivityListingRouter>
 
     private let activityData = BehaviorRelay<ActivityInfoEntity?>(value: nil)
 
     // MARK: - Initializer
 
     init(
-        router: StrongRouter<ActivityListingRouter>,
+        router: WeakRouter<ActivityListingRouter>,
         activityListingUseCase: ActivityListingUseCaseProtocol
     ) {
         self.router = router
@@ -103,6 +107,17 @@ final class ActivityListingViewModel:
                 if let object {
                     self?.router.trigger(.detailScreen(object: object))
                 }
+            })
+            .disposed(by: disposeBag)
+
+        openFilterScreen
+            .subscribe(onNext: { [weak self] in
+                guard let self else {
+                    return
+                }
+
+                let viewModel = ActivityFilterViewModel(router: self.router)
+                self.router.trigger(.filterScreen(viewModel: viewModel))
             })
             .disposed(by: disposeBag)
     }
